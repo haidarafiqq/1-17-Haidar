@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +22,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
-        "nama" => "Haiadr Afiq",
-        "email" => "31031201022@student.smktelkom-pwt.sch.id",
-        "gambar" => "poto aing.jpeg"
+        "nama" => "Haidar Afiq",
+        "email" => "3103120102@student.smktelkom-pwt.sch.id",
+        "gambar" => "gue.jpeg"
     ]);
 });
 
@@ -33,3 +33,5 @@ Route::get('/gallery', function () {
         "title" => "Gallery"
     ]);
 });
+
+Route::get('/contact', [ContactController::class, 'index']);
