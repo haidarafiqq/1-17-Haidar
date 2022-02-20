@@ -34,4 +34,4 @@ Route::get('/gallery', function () {
     ]);
 });
 
-Route::get('/contact', [ContactController::class, 'index']);
+Route::resource('/contacts', ContactController::class);
