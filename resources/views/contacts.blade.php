@@ -1,9 +1,12 @@
 @extends('layouts.main')
 
 @section('container')
+    <div class="container">
     <h1 class="mb-3">Contact Us</h1>
     <form method="POST" action="{{ route('contacts.store') }}">
-        @csrf
+    </div>
+    <form method="post" action="{{route('contacts.store')}}">
+        {{csrf_field()}}
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingInput" placeholder="Nama" name="nama">
             <label for="floatingInput">Nama</label>
@@ -19,4 +22,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
 @endsection
