@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,19 +14,24 @@ use App\Http\Controllers\ContactController;
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
 Route::get('/', function () {
     return view('index', [
-        "title" => "Home"
+        "title" => "Beranda"
     ]);
 });
 
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
-        "nama" => "Haidar Afiq",
-        "email" => "3103120102@student.smktelkom-pwt.sch.id",
+        "nama" => "Haidar Afiq Adistio",
+        "email" => "3103120102@student.smktelkom-pwtsch.id",
         "gambar" => "gue.jpeg"
     ]);
+
 });
 
 Route::get('/gallery', function () {
@@ -34,13 +40,16 @@ Route::get('/gallery', function () {
     ]);
 });
 
-Route::resource('/contacts', ContactController::class);
+//Route::resource('/contacts', ContactController::class);
+Route::get('/contacts', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () {
-    route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+Route::group(['middleware' => ['auth']], function (){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/contacts/index', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::post('/contacts/{id}/update', [ContactController::class, 'update'])->name('contacts.update');
+    Route::get('/contacts/{id}/destroy', [ContactController::class, 'destroy'])->name('contacts.destroy');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
